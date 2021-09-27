@@ -1,10 +1,12 @@
 {% extends "base.html"%}
 
 {% block content %}
-<h1 class="text-center pb-5">CONTACT US</h1>
-<div class="container">
+<h1 class="text-center pb-5">CAREER</h1>
+<div class="container"></div>
+<div>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
 
-    <form method="post">
         <div class="row justify-content-center">
             {% csrf_token %}
             <div class="col-4">
@@ -13,20 +15,32 @@
             </div>
             <div class="col-4">
                 <input class="form-control mb-3" type="email" id="{{ form.e_mail.auto_id }}" name="{{ form.e_mail.html_name }}" placeholder="enter e_mail">
-                <div class="text-danger"> {{ form.e_mail.errors }} </div>
+                <div class="text-danger"> {{ form.e_mail.errors }} </div>     
             </div>
         </div>
 
-        <div class="row row justify-content-center">
+        <div class="row justify-content-center">
             <div class="col-8">
                 <textarea class="form-control mb-3" id="{{ form.message.auto_id }}" name="{{ form.message.html_name }}" placeholder="enter message" cols="10" rows="5"></textarea>
             </div>
         </div>
         
+        <div class="row justify-content-center mb-3">
+            <div class="col-4">
+                Upload Your Resume
+            </div>
+            <div class="col-4">
+                <input type="file" name={{form.resume.html_name}} id={{ form.resume.auto_id }} class="form-control-file">
+                <div class="text-danger"> {{ form.resume.errors }} </div>
+            </div>
+            
+
+        </div>
         <div class="text-center">
             <input class="btn btn-success" type="submit" value="SEND MESSAGE">
         </div>
-    </form>
-    
+        
+
+     </form>
 </div>
 {% endblock %}
