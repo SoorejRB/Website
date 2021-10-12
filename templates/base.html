@@ -20,17 +20,21 @@
       
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            {% url 'general:home' as homeurl %}
+            <li class="nav-item {% if request.path == homeurl %}active {% endif %}">
+              <a class="nav-link {% if request.path == homeurl %}text-success{% endif %}" href="{{ homeurl }}">Home</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'general:career'%}">Career</a>
+            {% url 'general:career' as careerurl %}
+            <li class="nav-item {% if request.path == careerurl %}active{% endif %}">
+              <a class="nav-link" href="{{ careerurl }}">Career</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'general:contact'%}">contact</a>
+            {% url 'general:contact' as contacturl %}
+            <li class="nav-item {% if request.path == contacturl %}active{% endif %}">
+              <a class="nav-link" href="{{ contacturl }}">contact</a>
             </li>
-            <li>
-            <a class="nav-link" href="{% url 'general:tandc'%}">T&amp;C</a>
+            {% url 'general:tandc' as tandcurl %}
+            <li class="nav-item {% if request.path == tandcurl %}active{% endif %}">
+            <a class="nav-link" href="{{ tandcurl }}">tandc</a>
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0">
@@ -40,7 +44,7 @@
         </div>
       </nav>
 
-      <br>
+    
       {% if messages %}
       <ul class="messages">
         {% for message in messages %}
@@ -49,11 +53,51 @@
       </ul>
       {% endif %}
     </div> 
-<div class="container"> 
+<div class="container-fluid px-0"> 
     {% block content %}
 
     {% endblock %}
 </div> 
+<div class="container-fluid pt-4 bg-dark">
+<div class="row">
+  <div class="col-3 text-light">
+    <h3>About</h3>
+        <hr class="bg-light">
+    <p>FAQ</p>
+    <p>privacy policy</p>
+    <p>about us</p>
+    <p>terms and conditions</p>
+    <p>RSS Feed</p>
+  </div>
+  <div class="col-3 text-light">
+    <h3>News</h3>
+        <hr class="bg-light">
+    <p>Travel</p>
+    <p>Art</p>
+    <p>Business</p>
+    <p>sports</p>
+    <p>Politics</p>
+  </div>
+  <div class="col-3 text-light">
+    <h3>Features</h3>
+        <hr class="bg-light">
+    <p>Subscription</p>
+    <p>Accessibility</p>
+  </div>
+  <div class="col-3 text-light">
+    <h3>More</h3>
+        <hr class="bg-light">
+    <p>Newsletter</p>
+    <p>Ads</p>
+    <p>Sitemap</p>
+  </div>
+</div>
+<div class="text-center py-2 text-light bg-secondary">
+  {% now "Y" %} &copy; all rights reserved
+</div>
+</div>
+
+
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js'%}"></script>
     <script type="text/javascript" src="{% static 'js/popper.min.js'%}"></script>
     
